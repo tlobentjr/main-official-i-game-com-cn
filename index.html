@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 再次相遇的起点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #f2f4f6;
+            color: #1e2a36;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 主视觉 — 并非大图，而是文字主导的干净区块 */
+        .hero {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e8edf2;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0b1826;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(145deg, #1d4c6e, #2b6a8f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .sub {
+            font-size: 1.2rem;
+            color: #4a5d6f;
+            max-width: 600px;
+            margin: 0 auto 1.8rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #3f5365;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #e9edf2;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #1f3a4d;
+            letter-spacing: 0.3px;
+            margin-top: 0.5rem;
+            border: 1px solid #d5dee6;
+        }
+
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 1.8rem 2rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e2e9f0;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #142734;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2b6a8f;
+            padding-left: 0.9rem;
+        }
+
+        .card ul, .card p {
+            color: #2c4052;
+            font-size: 0.98rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            padding: 0.4rem 0 0.4rem 1.5rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #3f7b9e;
+            font-weight: 300;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .badge-list span {
+            background: #f0f4f9;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            color: #1f3f57;
+            border: 1px solid #d9e2ec;
+        }
+
+        /* 自然链接段落 & FAQ 摘要 */
+        .link-paragraph {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            border: 1px solid #e3eaf1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2rem;
+        }
+
+        .link-paragraph p {
+            margin-bottom: 1.2rem;
+            color: #2b4053;
+        }
+
+        .link-paragraph a {
+            color: #1d5b7e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #baccdc;
+        }
+
+        .link-paragraph a:hover {
+            border-bottom-color: #1d5b7e;
+        }
+
+        .faq-mini {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 2.2rem;
+            border: 1px solid #e1e9f1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2rem;
+        }
+
+        .faq-mini h3 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: #142734;
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #e3ecf4;
+            padding: 0.75rem 0;
+        }
+
+        .faq-mini details:last-child {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #1f4058;
+            cursor: pointer;
+            font-size: 0.98rem;
+            padding: 0.2rem 0;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #4b7897;
+        }
+
+        .faq-mini details p {
+            margin-top: 0.6rem;
+            padding-left: 0.4rem;
+            color: #314a5e;
+            font-size: 0.94rem;
+            border-left: 2px solid #cbdbe9;
+            padding-left: 1rem;
+        }
+
+        .footnote {
+            text-align: center;
+            padding: 2.2rem 1rem 0.5rem;
+            color: #5f7486;
+            font-size: 0.9rem;
+            border-top: 1px solid #dce5ee;
+            margin-top: 1.5rem;
+        }
+
+        .footnote small {
+            opacity: 0.6;
+        }
+
+        /* 响应式 */
+        @media (min-width: 660px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 920px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .hero {
+                padding: 4rem 3rem;
+            }
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero {
+                padding: 2rem 1.2rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Hero · 再次来访的感觉 -->
+    <div class="hero">
+        <h1>回到 <span>爱游戏</span></h1>
+        <div class="sub">熟悉的地方，总有新的故事</div>
+        <p>
+            收藏夹里的那个链接，或许就是每次想放松时第一个点开的站点。<br>
+            不必刻意寻找，它一直在那里，等你想起来的时候。
+        </p>
+        <div class="tagline">常回来看看 · 持续关注</div>
+    </div>
+
+    <!-- 卡片网格：用途 & 适合人群 & 日常场景 -->
+    <div class="card-grid">
+
+        <div class="card">
+            <h2>日常用途</h2>
+            <ul>
+                <li>午休时翻几页轻内容，换换心情</li>
+                <li>通勤路上看点有趣的资讯或片段</li>
+                <li>睡前随便逛逛，不必带着目的</li>
+                <li>周末想放松，又不想打开太重的内容</li>
+            </ul>
+            <div class="badge-list">
+                <span>碎片时间</span>
+                <span>轻阅读</span>
+                <span>无压力</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>适合这样的人</h2>
+            <ul>
+                <li>喜欢安静浏览、不被打扰的人</li>
+                <li>习惯把好站点留在收藏夹反复回来</li>
+                <li>对界面干净度有要求，反感花哨弹窗</li>
+                <li>更在意内容本身，而不是算法推荐</li>
+            </ul>
+            <div class="badge-list">
+                <span>收藏爱好者</span>
+                <span>老用户</span>
+                <span>安静党</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>持续关注的理由</h2>
+            <ul>
+                <li>内容保持更新，但节奏不吵闹</li>
+                <li>没有冗余推送，打开就是你想看的</li>
+                <li>风格稳定，每次访问都有熟悉感</li>
+                <li>适合长期放在标签栏或首页分类里</li>
+            </ul>
+            <div class="badge-list">
+                <span>低打扰</span>
+                <span>稳定调性</span>
+                <span>常驻标签</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 · 把「爱游戏」织进句子中 -->
+    <div class="link-paragraph">
+        <p>
+            如果你也习惯把喜欢的站点留在收藏夹里反复回来，那么<a href="https://main-official-i-game.com.cn">爱游戏</a>应该在其中占一个位置。
+            不用特意找入口，也不用每次重新搜索，直接点开就行。收藏夹里的东西越用越顺手，<a href="https://main-official-i-game.com.cn">爱游戏</a>也是这样——它不会变来变去，风格和内容一直保持着你最初喜欢的样子。
+        </p>
+        <p>
+            有时候打开网页并不是为了找什么，只是想看看有没有更新，或者单纯在熟悉的版面上待一会儿。<a href="https://main-official-i-game.com.cn">爱游戏</a>恰好适合这种状态。不用刻意记住它，只要想起的时候，它还在那里。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 · 轻量问答 -->
+    <div class="faq-mini">
+        <h3>你可能偶尔会想……</h3>
+        <details>
+            <summary>这个网站会经常变风格吗？</summary>
+            <p>不会。视觉和内容调性一直偏稳定，没有突然的大改版，熟悉的布局会一直保持。</p>
+        </details>
+        <details>
+            <summary>需要注册或登录才能看吗？</summary>
+            <p>不用注册，直接打开就能浏览。没有强制登录的环节，也没有弹窗让你留邮箱。</p>
+        </details>
+        <details>
+            <summary>适合用手机浏览器打开吗？</summary>
+            <p>适配移动端，手机和平板都能正常浏览，排版会自适应屏幕大小。</p>
+        </details>
+        <details>
+            <summary>怎么才能下次快速找到？</summary>
+            <p>添加书签或收藏到主页文件夹就行。链接没变过，一直可以访问。</p>
+        </details>
+    </div>
+
+    <!-- 底部柔和提醒 -->
+    <div class="footnote">
+        <span>从收藏夹里翻出来，或者重新输入熟悉的地址 —— 它还在。</span><br>
+        <small>内容保持更新 · 节奏依然安静</small>
+    </div>
+
+</div>
+</body>
+</html>

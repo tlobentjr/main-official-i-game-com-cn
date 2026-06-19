@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tlobentjr.github.io/main-official-i-game-com-cn/sitemap.xml

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>球友会 · 稳定入口与说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f9fb;
+            color: #1b2f37;
+            line-height: 1.6;
+            padding: 20px 16px 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        /* 主视觉卡片 —— 蓝绿渐变网格衬底 */
+        .hero-card {
+            background: linear-gradient(145deg, #d9efe9 0%, #b7ddd3 100%);
+            border-radius: 40px 16px 40px 16px;
+            padding: 40px 28px 36px;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -8px rgba(40, 90, 80, 0.15);
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(50, 130, 120, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(50, 130, 120, 0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #0a2c2a;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .hero-title span {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(4px);
+            padding: 0 10px 0 8px;
+            border-radius: 40px;
+            color: #0a3a34;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: #173e3a;
+            max-width: 540px;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(2px);
+            padding: 12px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .hero-desc a {
+            color: #004d40;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #2a8b7c;
+            font-weight: 500;
+        }
+
+        .hero-desc a:hover {
+            background-color: #d4f0ea;
+            border-radius: 6px;
+        }
+
+        /* 网格卡片 —— 用途 & 适合人群 */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 22px 18px 20px;
+            box-shadow: 0 6px 16px rgba(30, 80, 70, 0.06);
+            border: 1px solid #d6eae5;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 24px rgba(30, 100, 85, 0.10);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            display: block;
+            line-height: 1;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #12574b;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .card p, .card li {
+            font-size: 0.92rem;
+            color: #2b4c45;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 6px;
+        }
+
+        .card li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .card li::before {
+            content: '▹';
+            color: #359682;
+            font-weight: bold;
+        }
+
+        /* 自然链接段落卡片 */
+        .context-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 26px 24px 28px;
+            margin-bottom: 24px;
+            border-left: 8px solid #5cb3a2;
+            box-shadow: 0 4px 12px rgba(0, 60, 50, 0.04);
+        }
+
+        .context-card p {
+            margin-bottom: 14px;
+            font-size: 0.96rem;
+        }
+
+        .context-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .context-card a {
+            color: #1b7f6b;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #97cfc2;
+            font-weight: 500;
+        }
+
+        .context-card a:hover {
+            color: #0b4f41;
+            background-color: #e2f4ef;
+            border-radius: 8px;
+            padding: 0 4px;
+        }
+
+        .inline-highlight {
+            background: #e3f3ee;
+            padding: 0 6px;
+            border-radius: 12px;
+            color: #0b4f40;
+            font-weight: 500;
+        }
+
+        .faq-mini {
+            background: #f1f9f6;
+            border-radius: 24px;
+            padding: 18px 20px 20px;
+            margin-bottom: 24px;
+            border: 1px solid #c1dfd6;
+        }
+
+        .faq-mini dt {
+            font-weight: 600;
+            color: #0a423b;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+
+        .faq-mini dd {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: #2b5a52;
+            padding-left: 6px;
+            border-left: 2px solid #79bcae;
+        }
+
+        .faq-mini dd:last-child {
+            margin-bottom: 0;
+        }
+
+        .tip-note {
+            background: #d8ece6;
+            border-radius: 30px;
+            padding: 14px 20px;
+            font-size: 0.9rem;
+            color: #10453d;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tip-note span {
+            background: #2b8a78;
+            color: white;
+            border-radius: 60px;
+            padding: 2px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #cfe3dd;
+            margin: 28px 0 20px;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.82rem;
+            color: #507971;
+            opacity: 0.8;
+            padding-top: 6px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 540px) {
+            body {
+                padding: 14px 10px 30px;
+            }
+            .hero-card {
+                padding: 32px 20px 28px;
+                border-radius: 32px 12px 32px 12px;
+            }
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .card {
+                padding: 18px 14px 16px;
+            }
+            .context-card {
+                padding: 20px 16px 22px;
+            }
+            .faq-mini {
+                padding: 14px 16px;
+            }
+            .hero-desc {
+                font-size: 0.92rem;
+                padding: 10px 14px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero-title {
+                font-size: 1.4rem;
+            }
+            .card h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 主视觉 卡片 -->
+    <div class="hero-card">
+        <h1 class="hero-title">
+            <span>球友会</span> · 长久稳定的页面入口
+        </h1>
+        <div class="hero-desc">
+            无论何时到来，这里都是熟悉的起点。<br>
+            如果你想了解更完整的资讯与服务，可以直接前往 <a href="https://root-qiuyouhui.com">球友会</a> 浏览详情。
+        </div>
+    </div>
+
+    <!-- 用途卡片 + 适合人群 两列网格 -->
+    <div class="grid-2col">
+        <div class="card">
+            <span class="card-icon">📋</span>
+            <h3>用途与场景</h3>
+            <ul>
+                <li>日常信息查阅与页面导航</li>
+                <li>活动公告与交流圈入口</li>
+                <li>服务说明与常见问题索引</li>
+                <li>移动端随时打开的稳定页</li>
+            </ul>
+        </div>
+        <div class="card">
+            <span class="card-icon">👥</span>
+            <h3>适合人群</h3>
+            <ul>
+                <li>习惯使用线上工具的朋友</li>
+                <li>希望快速定位内容的用户</li>
+                <li>长期关注平台动态的成员</li>
+                <li>初次接触、想安静了解的人</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 —— 介绍与场景延伸 -->
+    <div class="context-card">
+        <p>
+            很多人第一次遇到 <a href="https://root-qiuyouhui.com">球友会</a> 时，都会好奇它的定位。
+            其实它更像一个信息集合与交流的起点：你可以在这里找到常用的功能入口、活动日历、伙伴动态以及一些实用的碎片内容。
+            页面结构保持简洁，不堆砌跳转，也不刻意引导，只把必要的信息放在明处。
+        </p>
+        <p>
+            与许多同类页面不同，<span class="inline-highlight">球友会</span> 注重长期可访问性，没有隐藏的跳转逻辑。
+            无论是通过手机浏览器还是桌面端，都能获得一致的浏览感受。
+            如果你恰好需要一个安静且稳定的页面作为日常入口，不妨把 <a href="https://root-qiuyouhui.com">球友会</a> 记在书签里。
+        </p>
+        <p>
+            另外，页面上的每个模块都经过轻量化设计，加载迅速，也不依赖第三方脚本。
+            对于注重隐私和浏览流畅度的人来说，这是一个很实际的选择。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <dl class="faq-mini">
+        <dt>❓ 球友会 页面主要提供什么？</dt>
+        <dd>主要作为信息索引与稳定入口，展示常用链接、活动摘要以及基础说明，方便快速回顾或直达相关内容。</dd>
+
+        <dt>❓ 移动设备上显示效果如何？</dt>
+        <dd>完全适配手机屏幕，卡片布局会随宽度自动调整，触控区域也做了优化，单手操作很顺手。</dd>
+
+        <dt>❓ 是否需要注册或登录才能浏览？</dt>
+        <dd>不需要。页面所有内容公开可见，只有部分深层互动可能需要关联账号，但入口页面本身无需任何验证。</dd>
+    </dl>
+
+    <!-- 提示卡 -->
+    <div class="tip-note">
+        <span>提示</span>
+        如果你希望长期使用这个页面，建议将其添加到主屏幕或书签栏。
+        后续内容会持续更新，但入口地址始终保持不变。
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+        <a href="https://root-qiuyouhui.com" style="text-decoration: underline; text-underline-offset: 3px; color: #2d7a6a;">球友会</a> · 页面版本持续维护
+    </div>
+
+</div>
+</body>
+</html>
